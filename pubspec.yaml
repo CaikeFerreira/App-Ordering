@@ -9,6 +9,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_bloc:
+  http:
+  flutter_screenutil: ^5.0.0+2
+  intl:
+  flex_color_scheme:
 
 dev_dependencies:
   flutter_test:
@@ -17,3 +22,6 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  assets:
+    - assets/images/
