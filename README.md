@@ -17,11 +17,12 @@ This project is the Front-End of an ordering app developed in Flutter. It allows
 - State Management: Bloc
 
 ## Layout
-![Home](https://github.com/CaikeFerreira/App-Ordering/blob/main/assets/layout/Layout%20Home.jpg)
-![Products](https://github.com/CaikeFerreira/App-Ordering/blob/main/assets/layout/Layout%20Product%20List.jpg)
-
-![Cart](https://github.com/CaikeFerreira/App-Ordering/blob/main/assets/layout/Layout%20Cart.jpg)
-![Orders](https://github.com/CaikeFerreira/App-Ordering/blob/main/assets/layout/Layout%20Order.jpg)
+<div style="display: flex; justify-content: space-around;">
+  <img src="https://github.com/CaikeFerreira/App-Ordering/blob/main/assets/layout/Layout%20Home.jpg" alt="Home" width="240"/>
+  <img src="https://github.com/CaikeFerreira/App-Ordering/blob/main/assets/layout/Layout%20Product%20List.jpg" alt="Products" width="240"/>
+  <img src="https://github.com/CaikeFerreira/App-Ordering/blob/main/assets/layout/Layout%20Cart.jpg" alt="Cart" width="240"/>
+  <img src="https://github.com/CaikeFerreira/App-Ordering/blob/main/assets/layout/Layout%20Order.jpg" alt="Orders" width="240"/>
+</div>
 
 ## Project Architecture
 The project follows the MVVM (Model-View-ViewModel) architecture, ensuring a clear separation between business logic, user interface, and data management, facilitating the app’s maintenance and scalability.
