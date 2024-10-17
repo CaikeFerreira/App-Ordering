@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:front_end/screens/cart/widgets/emptycart.dart';
-import 'package:front_end/screens/home/Widgets/navigation_cart.dart';
 
 import 'bottom.dart';
+import 'emptycart.dart';
 import '../../../models/product.dart';
+import '../../home/Widgets/navigation_cart.dart';
 import '../../../screen_widgets/cardproduct/cardproduct.dart';
 
 class BodyScreen extends StatelessWidget {

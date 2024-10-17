@@ -1,5 +1,5 @@
-import '../http/products/product_http.dart';
 import '../models/product.dart';
+import '../http/products/product_http.dart';
 
 class ProductScreenModels {
   Future<List<Product>> findAll(int clientTypeId) {

@@ -3,25 +3,6 @@ import 'package:flutter/material.dart';
 import 'src/content_typre.dart';
 import 'src/snackbar_content.dart';
 
-// SnackBarCustom(BuildContext context, String title, String message,
-//     ContentType contentType) {
-//   ScaffoldMessenger.of(context)
-//     ..hideCurrentSnackBar()
-//     ..showSnackBar(
-//       SnackBar(
-//         elevation: 0,
-//         behavior: SnackBarBehavior.floating,
-//         backgroundColor: Colors.transparent,
-//         dismissDirection: DismissDirection.horizontal,
-//         content: SnackBarContent(
-//           title: title,
-//           message: message,
-//           contentType: contentType,
-//         ),
-//       ),
-//     );
-// }
-
 snackBarCustom({
   required BuildContext context,
   required String title,

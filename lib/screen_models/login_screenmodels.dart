@@ -1,6 +1,5 @@
-import 'package:front_end/http/logins/login_http.dart';
-
 import '../models/login.dart';
+import '../http/logins/login_http.dart';
 
 class LoginScreenModels {
   Future<Login> findLogin(Login login) async {

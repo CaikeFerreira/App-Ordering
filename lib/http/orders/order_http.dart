@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-import 'package:front_end/constants/uris.dart';
 import 'package:http/http.dart';
 
-import '../../models/order.dart';
 import '../httpclient.dart';
+import '../../models/order.dart';
+import '../../constants/uris.dart';
 
 class OrderHttp {
   Future<Order> add(Order order) async {

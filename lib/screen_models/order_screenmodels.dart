@@ -1,11 +1,9 @@
-import 'package:front_end/models/order.dart';
-import 'package:front_end/models/orderitem.dart';
-import 'package:front_end/http/orders/order_http.dart';
-
+import '../models/order.dart';
 import '../models/product.dart';
+import '../models/orderitem.dart';
+import '../http/orders/order_http.dart';
 
 class OrderScreenModels {
-
   Future<Order> add(Order order) async {
     return OrderHttp().add(order);
   }

@@ -1,4 +1,4 @@
-import 'package:front_end/models/orderitem.dart';
+import 'orderitem.dart';
 
 class Order {
   num id;

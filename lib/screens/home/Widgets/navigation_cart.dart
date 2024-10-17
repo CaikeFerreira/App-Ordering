@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:front_end/models/abstrscts/state_screen.dart';
-import 'package:front_end/models/abstrscts/bloccontainer.dart';
+
+import '../../../models/abstrscts/state_screen.dart';
+import '../../../models/abstrscts/bloccontainer.dart';
 
 @immutable
 class LoadedNavigationState extends ScreenState {

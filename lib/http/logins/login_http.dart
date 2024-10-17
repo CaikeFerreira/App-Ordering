@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-import 'package:front_end/constants/uris.dart';
-import 'package:front_end/models/login.dart';
 import 'package:http/http.dart';
 
 import '../httpclient.dart';
+import '../../models/login.dart';
+import '../../constants/uris.dart';
 
 class LoginHttp {
   Future<Login> find(Login login) async {

@@ -2,14 +2,14 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:front_end/screen_widgets/progress.dart';
-import 'package:front_end/screen_widgets/background.dart';
-import 'package:front_end/screens/login/widgets/body.dart';
-import 'package:front_end/models/abstrscts/bloccontainer.dart';
 
+import 'widgets/body.dart';
 import '../../models/login.dart';
+import 'widgets/background.dart';
 import '../home/home_screen.dart';
+import '../../screen_widgets/progress.dart';
 import '../../models/abstrscts/state_screen.dart';
+import '../../models/abstrscts/bloccontainer.dart';
 import '../../screen_models/login_screenmodels.dart';
 import '../../screen_widgets/snackbar/snackbar_custom.dart';
 

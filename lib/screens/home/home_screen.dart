@@ -1,13 +1,13 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:front_end/models/login.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:front_end/models/abstrscts/state_screen.dart';
-import 'package:front_end/models/abstrscts/bloccontainer.dart';
-import 'package:front_end/screens/home/Widgets/bodyScreen.dart';
 
+import 'Widgets/bodyScreen.dart';
+import '../../models/login.dart';
 import '../login/login_screen.dart';
+import '../../models/abstrscts/state_screen.dart';
+import '../../models/abstrscts/bloccontainer.dart';
 import '../../screen_widgets/snackbar/snackbar_custom.dart';
 
 @immutable
@@ -66,7 +66,7 @@ class HomeContainer extends BlocContainer {
         BlocProvider<HomeCubit>(
           create: (context) {
             final cubit = HomeCubit();
-            cubit.SuccessLogin(Login(id: 1, clientTypeId: 1, name: "Caike", user: "Caike", password: "123"));
+            cubit.Logout();
             return cubit;
           },
         ),

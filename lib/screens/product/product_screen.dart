@@ -2,16 +2,17 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:front_end/screen_widgets/progress.dart';
-import 'package:front_end/models/abstrscts/bloccontainer.dart';
-import 'package:front_end/screen_widgets/centered_message.dart';
-import 'package:front_end/screen_models/product_screenmodels.dart';
-import 'package:front_end/screen_widgets/snackbar/snackbar_custom.dart';
 
 import 'widgets/load_product.dart';
 import '../../models/product.dart';
+import '../../constants/attributes.dart';
+import '../../screen_widgets/progress.dart';
 import '../../screen_widgets/search_field.dart';
 import '../../models/abstrscts/state_screen.dart';
+import '../../models/abstrscts/bloccontainer.dart';
+import '../../screen_widgets/centered_message.dart';
+import '../../screen_models/product_screenmodels.dart';
+import '../../screen_widgets/snackbar/snackbar_custom.dart';
 
 class LoadedProductState extends ScreenState {
   final List<Product> _products;
@@ -38,7 +39,7 @@ class ProductCubit extends Cubit<ScreenState> {
           await ProductScreenModels().findAll(clientTypeId);
       _products = products;
 
-      emit(LoadedProductState(products));
+      if (!isClosed) emit(LoadedProductState(products));
     } on TimeoutException {
       emit(const FatalErrorProductState("Servidor não responde!"));
     } catch (e) {
@@ -90,28 +91,31 @@ class ProductContainer extends BlocContainer {
 class _ProductScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        BlocBuilder<ProductCubit, ScreenState>(
-          builder: (context, state) {
-            if (state is InitScreenState || state is LoadingScreenState) {
-              return const Progress();
-            }
+    return Padding(
+      padding: const EdgeInsets.all(defaultPadding * 0.5),
+      child: Stack(
+        children: [
+          BlocBuilder<ProductCubit, ScreenState>(
+            builder: (context, state) {
+              if (state is InitScreenState || state is LoadingScreenState) {
+                return const Progress();
+              }
 
-            if (state is LoadedProductState) {
-              return LoadProduct(context, state._products);
-            }
+              if (state is LoadedProductState) {
+                return LoadProduct(context, state._products);
+              }
 
-            return const CenteredMessage(
-              'Unknow error',
-              icon: Icons.error_outline,
-            );
-          },
-        ),
-        SearchField(
-          onChanged: _findProduct,
-        ),
-      ],
+              return const CenteredMessage(
+                'Unknow error',
+                icon: Icons.error_outline,
+              );
+            },
+          ),
+          SearchField(
+            onChanged: _findProduct,
+          ),
+        ],
+      ),
     );
   }
 }

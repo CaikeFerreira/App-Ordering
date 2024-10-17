@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:front_end/screens/home/home_screen.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+
+import 'screens/home/home_screen.dart';
 
 void main() {
   //Barrando a orientação em retrato
@@ -64,11 +65,9 @@ class MyApp extends StatelessWidget {
         visualDensity: FlexColorScheme.comfortablePlatformDensity,
         useMaterial3: true,
         swapLegacyOnMaterial3: true,
-        // To use the Playground font, add GoogleFonts package and uncomment
         fontFamily: GoogleFonts.notoSans().fontFamily,
       ),
       home: const HomeContainer(),
     );
   }
 }
-

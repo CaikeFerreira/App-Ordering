@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:front_end/models/abstrscts/bloccontainer.dart';
 
+import 'perfil_action.dart';
+import 'navigation_cart.dart';
 import '../../../models/login.dart';
 import '../../cart/cart_screen.dart';
 import '../../order/order_screen.dart';
+import '../../../constants/ImagePath.dart';
 import '../../product/product_screen.dart';
-import 'navigation_cart.dart';
-import 'perfil_action.dart';
+import '../../../models/abstrscts/bloccontainer.dart';
 
 class BodyHomeContainer extends BlocContainer {
   final Login login;
@@ -39,7 +40,6 @@ class _BodyHome extends StatefulWidget {
   final Login login;
 
   const _BodyHome({
-    super.key,
     required this.login,
   });
 
@@ -62,37 +62,43 @@ class _BodyHomeState extends State<_BodyHome> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Image.asset("assets/images/logo256x256.png", width: 35),
-        centerTitle: true,
-        actions: [
-          ProfileAction(),
-        ],
+        elevation: 5,
+        title: SizedBox(width: 35, child: Imagez.logo),
+        actions: const [ProfileAction()],
       ),
-      bottomNavigationBar: NavigationBar(
-        onDestinationSelected: (int index) {
-          updatePage(index);
-        },
-        indicatorColor: Theme.of(context).primaryColorLight,
-        selectedIndex: currentPageIndex,
-        destinations: const [
-          NavigationDestination(
-            selectedIcon: Icon(Icons.paste_rounded),
-            icon: Icon(Icons.paste_outlined),
-            label: "Produtos",
+      bottomNavigationBar: Container(
+        color: currentPageIndex == 1
+            ? Theme.of(context).secondaryHeaderColor
+            : Theme.of(context).scaffoldBackgroundColor,
+        child: Card(
+          elevation: 5,
+          child: NavigationBar(
+            onDestinationSelected: (int index) {
+              updatePage(index);
+            },
+            indicatorColor: Theme.of(context).primaryColorLight,
+            selectedIndex: currentPageIndex,
+            destinations: const [
+              NavigationDestination(
+                selectedIcon: Icon(Icons.paste_rounded),
+                icon: Icon(Icons.paste_outlined),
+                label: "Produtos",
+              ),
+              NavigationCartContainer(),
+              NavigationDestination(
+                selectedIcon: Icon(Icons.request_page_rounded),
+                icon: Icon(Icons.request_page_outlined),
+                label: "Pedidos",
+              ),
+            ],
           ),
-          NavigationCartContainer(),
-          NavigationDestination(
-            selectedIcon: Icon(Icons.request_page_rounded),
-            icon: Icon(Icons.request_page_outlined),
-            label: "Pedidos",
-          ),
-        ],
+        ),
       ),
       body: <Widget>[
         ProductContainer(
           clientTypeId: int.parse(widget.login.clientTypeId.toString()),
         ),
-        CartContainer(),
+        const CartContainer(),
         OrderContainer(
           clientId: int.parse(widget.login.id.toString()),
         ),

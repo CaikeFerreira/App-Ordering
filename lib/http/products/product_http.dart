@@ -2,9 +2,9 @@ import 'dart:convert';
 
 import 'package:http/http.dart';
 
-import '../../constants/uris.dart';
-import '../../models/product.dart';
 import '../httpclient.dart';
+import '../../models/product.dart';
+import '../../constants/uris.dart';
 
 class ProductHttp {
   Future<List<Product>> findAll(int clientTypeId) async {
