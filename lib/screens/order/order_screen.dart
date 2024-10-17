@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:front_end/screens/order/widgets/loadorders.dart';
 
+import 'widgets/loadorders.dart';
 import '../../models/order.dart';
 import '../../screen_widgets/progress.dart';
 import '../../models/abstrscts/state_screen.dart';
@@ -22,21 +22,18 @@ class FatalErrorOrderState extends ScreenState {
   const FatalErrorOrderState(this._message);
 }
 
-List<Order> _orders = [];
-
 class OrderCubit extends Cubit<ScreenState> {
   int clientId = 0;
 
   OrderCubit({required this.clientId}) : super(const InitScreenState());
 
-  Future<void> load() async {
+  void load() async {
     try {
       emit(const LoadingScreenState());
 
       List<Order> orders = await OrderScreenModels().findAll(clientId);
-      _orders = orders;
 
-      emit(LoadedOrderState(orders));
+      if (!isClosed) emit(LoadedOrderState(orders));
     } on TimeoutException {
       emit(const FatalErrorOrderState("Servidor não responde!"));
     } catch (e) {
@@ -64,9 +61,9 @@ class OrderContainer extends BlocContainer {
       providers: [
         BlocProvider(
           create: (BuildContext context) {
-            final cubit = OrderCubit(clientId: clientId);
-            cubit.load();
-            return cubit;
+            var orderCubit = OrderCubit(clientId: clientId);
+            orderCubit.load();
+            return orderCubit;
           },
         ),
         BlocListener<OrderCubit, ScreenState>(
