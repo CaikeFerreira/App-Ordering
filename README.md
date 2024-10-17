@@ -19,7 +19,7 @@ This project is the Front-End of an ordering app developed in Flutter. It allows
 ## Layout
 <div style="display: flex; justify-content: space-around;">
   <img src="https://github.com/CaikeFerreira/App-Ordering/blob/main/assets/layout/Layout%20Home.png" alt="Home" width="240"/>
-  <img src="https://github.com/CaikeFerreira/App-Ordering/blob/main/assets/layout/Layout%20Product%20List.png" alt="Products" width="240"/>
+  <img src="https://github.com/CaikeFerreira/App-Ordering/blob/main/assets/layout/Layout%20Product.png" alt="Products" width="240"/>
   <img src="https://github.com/CaikeFerreira/App-Ordering/blob/main/assets/layout/Layout%20Cart.png" alt="Cart" width="240"/>
   <img src="https://github.com/CaikeFerreira/App-Ordering/blob/main/assets/layout/Layout%20Order.png" alt="Orders" width="240"/>
 </div>
