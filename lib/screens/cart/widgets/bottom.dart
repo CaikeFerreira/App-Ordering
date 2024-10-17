@@ -1,10 +1,11 @@
 import 'package:intl/intl.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:front_end/screens/cart/cart_screen.dart';
 
-import '../../../constants/attributes.dart';
+import '../cart_screen.dart';
 import '../../../models/product.dart';
+import '../../../constants/attributes.dart';
 import '../../../screen_models/product_screenmodels.dart';
 
 class CartBottom extends StatelessWidget {
@@ -21,7 +22,7 @@ class CartBottom extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 150,
-      padding: const EdgeInsets.all(defaultPadding),
+      padding: const EdgeInsets.all(defaultPadding * 2),
       decoration: BoxDecoration(
         color: Theme.of(context).secondaryHeaderColor,
         borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),

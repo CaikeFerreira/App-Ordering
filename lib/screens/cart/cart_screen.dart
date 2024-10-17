@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:front_end/models/abstrscts/bloccontainer.dart';
 
 import '../../models/order.dart';
 import 'widgets/body_screen.dart';
@@ -10,15 +9,14 @@ import '../../models/product.dart';
 import '../../screen_widgets/progress.dart';
 import '../home/Widgets/navigation_cart.dart';
 import '../../models/abstrscts/state_screen.dart';
+import '../../models/abstrscts/bloccontainer.dart';
 import '../../screen_widgets/centered_message.dart';
 import '../../screen_models/order_screenmodels.dart';
 import '../../screen_widgets/snackbar/snackbar_custom.dart';
 
-
-
 @immutable
 class LoadedCartState extends ScreenState {
-  final List<Product> _products;
+  final List<Product?> _products;
   const LoadedCartState(this._products);
 }
 
@@ -28,8 +26,7 @@ class FatalErrorCartState extends ScreenState {
   const FatalErrorCartState(this._message);
 }
 
-List<Product> _products = [];
-num _clientId = 0;
+List<Product?> _products = [];
 
 class CartCubit extends Cubit<ScreenState> {
   num clientId;
@@ -49,7 +46,10 @@ class CartCubit extends Cubit<ScreenState> {
 
   Future<void> add(BuildContext context, Product product) async {
     try {
-      Product? duplicityProduct = null;
+      Product? duplicityProduct = _products.firstWhere(
+        (x) => x != null && x.id == product.id,
+        orElse: () => null,
+      );
 
       if (duplicityProduct == null) {
         _products.add(product);
@@ -75,7 +75,7 @@ class CartCubit extends Cubit<ScreenState> {
       _products.remove(product);
       _products.add(product);
 
-      // emit(LoadedCartState(_products));
+      emit(LoadedCartState(_products));
     } on TimeoutException {
       emit(const FatalErrorCartState("Servidor não responde!"));
     } catch (e) {
@@ -104,8 +104,9 @@ class CartCubit extends Cubit<ScreenState> {
     try {
       emit(const LoadingScreenState());
 
-      if (!_products.isEmpty) {
-        Order order = OrderScreenModels().createOrder(clientId, _products);
+      if (_products.isNotEmpty) {
+        Order order =
+            OrderScreenModels().createOrder(clientId, _products.cast());
 
         await OrderScreenModels().add(order);
 
@@ -158,7 +159,7 @@ class _CartScreen extends StatelessWidget {
         }
 
         if (state is LoadedCartState) {
-          return BodyScreen(products: state._products);
+          return BodyScreen(products: state._products.cast());
         }
 
         return const CenteredMessage(
