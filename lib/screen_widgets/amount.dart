@@ -58,21 +58,22 @@ class _AmountState extends State<Amount> {
     return SizedBox(
       height: 30,
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           IconButton(
             color: Theme.of(context).primaryColor,
-            iconSize: 13,
+            iconSize: 15,
             onPressed: _decrementCount,
             icon: const Icon(Icons.remove),
           ),
           SizedBox(
-            width: 30,
+            width: 40,
             child: TextField(
               textAlign: TextAlign.center,
               textAlignVertical: TextAlignVertical.center,
               style: const TextStyle(fontSize: 12),
               decoration: const InputDecoration(
-                contentPadding: EdgeInsets.only(bottom: 15, left: 2.5),
+                contentPadding: EdgeInsets.only(bottom: 10, left: 2.5),
                 border: OutlineInputBorder(
                   borderSide: BorderSide.none,
                   borderRadius: BorderRadius.all(
@@ -92,7 +93,7 @@ class _AmountState extends State<Amount> {
           ),
           IconButton(
             color: Theme.of(context).primaryColor,
-            iconSize: 13,
+            iconSize: 15,
             onPressed: _incrementCount,
             icon: const Icon(Icons.add),
           ),

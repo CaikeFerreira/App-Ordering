@@ -15,7 +15,8 @@ class CardCustom extends StatelessWidget {
         borderRadius: BorderRadius.circular(defaultRadiusBorder),
       ),
       elevation: 5,
-      child: SizedBox(
+      child: Container(
+        padding: const EdgeInsets.all(defaultPadding),
         height: height,
         child: child,
       ),

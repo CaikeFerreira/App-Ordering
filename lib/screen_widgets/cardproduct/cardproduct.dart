@@ -1,24 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:front_end/models/product.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:front_end/constants/attributes.dart';
-import 'package:front_end/screen_widgets/card/cardcustom.dart';
 
-import '../amount.dart';
 import 'widgets/image.dart';
 import 'widgets/addcart.dart';
 import 'widgets/removecart.dart';
-import '../../screens/cart/cart_screen.dart';
+import '../card/cardcustom.dart';
+import '../../models/product.dart';
+import '../../constants/attributes.dart';
 
-class CardProduct extends StatelessWidget {
+class CardProduct extends StatefulWidget {
   final Product product;
   final Function() onTap;
   final bool addCart;
   final bool removeCart;
-  final TextEditingController _amountController =
-      TextEditingController(text: '0');
 
-  CardProduct.addCart({
+  const CardProduct.addCart({
     super.key,
     required this.product,
     required this.onTap,
@@ -26,7 +21,7 @@ class CardProduct extends StatelessWidget {
     this.removeCart = false,
   });
 
-  CardProduct.removeCart({
+  const CardProduct.removeCart({
     super.key,
     required this.product,
     required this.onTap,
@@ -35,108 +30,85 @@ class CardProduct extends StatelessWidget {
   });
 
   @override
+  State<CardProduct> createState() => _CardProductState();
+}
+
+class _CardProductState extends State<CardProduct> {
+  final TextEditingController _amountController =
+      TextEditingController(text: '1');
+  num _productPriceTotal = 0;
+
+  void _updateAmount() {
+    int quantity = int.parse(_amountController.text);
+
+    if (widget.removeCart) _productPriceTotal = widget.product.price * quantity;
+  }
+
+  @override
   Widget build(BuildContext context) {
-    _amountController.text = product.amount.toString();
+    _amountController.text = widget.product.amount.toString();
+    _productPriceTotal = widget.product.price;
+    _updateAmount();
 
-    //NumberFormat formatNumero = NumberFormat.decimalPattern(locale);
-    return Padding(
-      padding: const EdgeInsets.all(defaultPadding),
-      child: Stack(
-        children: [
-          CardCustom(
-            height: 100,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(6.0),
-                  child: ImageTask(),
-                ),
-                Expanded(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        product.name,
-                        style: const TextStyle(
-                          fontSize: 12,
-                          overflow: TextOverflow.ellipsis,
+    return CardCustom(
+      child: IntrinsicHeight(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const ImageTask(),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          widget.product.name,
+                          style: Theme.of(context).textTheme.bodySmall,
                         ),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            product.ean.toString(),
-                            style: const TextStyle(
-                              fontSize: 12,
-                              overflow: TextOverflow.ellipsis,
-                            ),
+                        Text(
+                          widget.product.ean.toString(),
+                          style: Theme.of(context).textTheme.bodySmall,
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          formatMoeda.format(_productPriceTotal),
+                          style: Theme.of(context).textTheme.bodyLarge,
+                        ),
+                        if (widget.addCart)
+                          AddCart(
+                            product: widget.product,
+                            amountController: _amountController,
                           ),
-                          if (addCart)
-                            Amount(
-                              controller: _amountController,
-                            ),
-                          if (removeCart)
-                            RemoveCart(
-                              onPressed: () {
-                                BlocProvider.of<CartCubit>(context)
-                                    .delete(context, product);
-                              },
-                            ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            formatMoeda.format(product.price),
-                            style: const TextStyle(
-                              fontSize: 16,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                          if (addCart)
-                            AddCart(
-                              onPressed: () {
-                                num? amount =
-                                    num.tryParse(_amountController.text);
-
-                                if (amount != null) {
-                                  if (amount == 0) amount = 1;
-
-                                  product.amount = amount;
-                                }
-
-                                BlocProvider.of<CartCubit>(context)
-                                    .add(context, product);
-                              },
-                            ),
-                          if (removeCart)
-                            Amount(
-                              controller: _amountController,
-                              alterAmount: (count) {
-                                product.amount = count;
-
-                                // if (count <= 0) {
-                                //   BlocProvider.of<CartCubit>(context)
-                                //       .delete(context, product);
-                                // } else {
-                                BlocProvider.of<CartCubit>(context)
-                                    .update(product);
-                                // }
-                              },
-                            ),
-                        ],
-                      ),
-                    ],
-                  ),
+                      ],
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
-          ),
-        ],
+            if (widget.removeCart)
+              RemoveCart(
+                product: widget.product,
+                amountController: _amountController,
+                updateAmount: () {
+                  setState(
+                    () {
+                      _updateAmount();
+                    },
+                  );
+                },
+              ),
+          ],
+        ),
       ),
     );
   }
