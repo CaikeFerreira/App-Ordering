@@ -20,7 +20,6 @@ class TextFormFielLogin extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      margin: const EdgeInsets.symmetric(horizontal: 40),
       child: TextFormField(
         obscureText: obscureText,
         controller: controller,

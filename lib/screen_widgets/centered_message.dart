@@ -10,6 +10,7 @@ class CenteredMessage extends StatelessWidget {
 
   const CenteredMessage(
     this.message, {
+    super.key,
     this.icon,
     this.iconSize = 64,
     this.fontSize = 24,
