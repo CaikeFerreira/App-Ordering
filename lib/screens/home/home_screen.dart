@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'Widgets/bodyScreen.dart';
+import 'Widgets/body.dart';
 import '../../models/login.dart';
 import '../login/login_screen.dart';
 import '../../models/abstrscts/state_screen.dart';
@@ -31,7 +31,7 @@ class FatalErrorState extends ScreenState {
 class HomeCubit extends Cubit<ScreenState> {
   HomeCubit() : super(const InitScreenState());
 
-  void Logout() {
+  void logout() {
     try {
       emit(const LoadingScreenState());
 
@@ -43,7 +43,7 @@ class HomeCubit extends Cubit<ScreenState> {
     }
   }
 
-  void SuccessLogin(Login login) {
+  void successLogin(Login login) {
     try {
       emit(const LoadingScreenState());
 
@@ -66,7 +66,7 @@ class HomeContainer extends BlocContainer {
         BlocProvider<HomeCubit>(
           create: (context) {
             final cubit = HomeCubit();
-            cubit.Logout();
+            cubit.logout();
             return cubit;
           },
         ),

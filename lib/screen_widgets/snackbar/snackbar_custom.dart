@@ -30,7 +30,7 @@ snackBarCustomError({
   snackBarCustom(
       context: context,
       title: 'Erro',
-      message: 'Algo deu errado: ${message}',
+      message: 'Algo deu errado: $message',
       contentType: ContentType.failure);
 }
 

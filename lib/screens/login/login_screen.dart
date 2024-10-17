@@ -89,7 +89,7 @@ class LoginContainer extends BlocContainer {
             }
 
             if (state is LoginSuccessState) {
-              BlocProvider.of<HomeCubit>(context).SuccessLogin(state._login);
+              BlocProvider.of<HomeCubit>(context).successLogin(state._login);
             }
           },
         ),
@@ -106,7 +106,7 @@ class _LoginScreen extends StatelessWidget {
   final TextEditingController userController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
-  _LoginScreen({super.key});
+  _LoginScreen();
 
   @override
   Widget build(BuildContext context) {

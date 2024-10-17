@@ -8,10 +8,10 @@ class SnackBarContent extends StatelessWidget {
   final ContentType contentType;
 
   const SnackBarContent({
-    Key? key,
+    super.key,
     required this.message,
     required this.contentType,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -14,7 +14,7 @@ class ProfileAction extends StatelessWidget {
           return PopupMenuItem(
             value: choice,
             child: Text(choice),
-            onTap: () => BlocProvider.of<HomeCubit>(context).Logout(),
+            onTap: () => BlocProvider.of<HomeCubit>(context).logout(),
           );
         }).toList();
       },

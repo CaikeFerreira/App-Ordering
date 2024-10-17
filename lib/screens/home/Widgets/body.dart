@@ -6,7 +6,7 @@ import 'navigation_cart.dart';
 import '../../../models/login.dart';
 import '../../cart/cart_screen.dart';
 import '../../order/order_screen.dart';
-import '../../../constants/ImagePath.dart';
+import '../../../constants/image_path.dart';
 import '../../product/product_screen.dart';
 import '../../../models/abstrscts/bloccontainer.dart';
 

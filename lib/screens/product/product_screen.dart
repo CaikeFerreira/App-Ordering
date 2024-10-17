@@ -102,7 +102,7 @@ class _ProductScreen extends StatelessWidget {
               }
 
               if (state is LoadedProductState) {
-                return LoadProduct(context, state._products);
+                return loadProduct(context, state._products);
               }
 
               return const CenteredMessage(

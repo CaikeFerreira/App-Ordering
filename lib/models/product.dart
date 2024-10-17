@@ -20,7 +20,7 @@ class Product {
         ean = json['ean'],
         name = json['name'],
         //amount = json['amaount'],
-        price = json['price'] != null ? json['price'] : 999,
+        price = json['price'] ?? 999,
         validity = json['price'] != null
             ? DateTime.parse(json['validity'])
             : DateTime.parse("0001-01-01");

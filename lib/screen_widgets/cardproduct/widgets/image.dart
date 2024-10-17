@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ImageTask extends StatelessWidget {
+  const ImageTask({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(

@@ -22,7 +22,7 @@ class BodyScreen extends StatelessWidget {
     BlocProvider.of<NavigationCartCubit>(context).updateAmount(products.length);
     return Stack(
       children: [
-        if (products.isEmpty) EmptyCart(),
+        if (products.isEmpty) const EmptyCart(),
         ListView(
           children: [
             for (Product product in products)
